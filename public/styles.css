@@ -1,0 +1,76 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #D1EDE1;
+}
+
+h1 {
+    text-align: center;
+    color: #028C6A;
+}
+
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #028C6A;
+}
+
+input {
+    padding: 5px;
+    width: 200px;
+}
+
+button {
+    padding: 8px;
+    cursor: pointer;
+    background-color: #7BC5AE;
+    /* Monte Carlo */
+    color: white;
+    border: none;
+}
+
+#bookList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bookBlock {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+    background-color: #D1EDE1;
+    /* Swans Down */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.bookBlock:hover {
+    transform: scale(1.05);
+}
+
+.bookBlock p {
+    margin: 5px 0;
+}
+
+.bookBlock button {
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.logEntry {
+    border: 1px solid #028C6A;
+    background-color: #D1EDE1;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: black;
+}

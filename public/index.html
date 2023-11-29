@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>Library Management App</title>
+</head>
+<body>
+  <h1>Library Management App</h1>
+
+  <div>
+    <label for="bookTitle">Book Title:</label>
+    <input type="text" id="bookTitle" />
+    <button onclick="issueBook()">Issue Book</button>
+  </div>
+
+  <div id="bookList" class="flex-container"></div>
+
+  <div id="logContainer"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
