@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
 const Book = sequelize.define('Book', {
@@ -18,7 +18,5 @@ const Book = sequelize.define('Book', {
     defaultValue: 0,
   },
 });
-
-sequelize.sync();
 
 module.exports = Book;

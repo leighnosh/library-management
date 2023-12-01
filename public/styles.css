@@ -1,7 +1,9 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 20px;
+    padding: 0 20px; /* Equal padding from both left and right */
     background-color: #D1EDE1;
+    
 }
 
 h1 {
@@ -10,7 +12,7 @@ h1 {
 }
 
 div {
-    margin-bottom: 15px;
+    margin-bottom: 20px; 
 }
 
 label {
@@ -25,32 +27,41 @@ input {
 }
 
 button {
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
     background-color: #7BC5AE;
-    /* Monte Carlo */
     color: white;
     border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #5B9F8E;
 }
 
 #bookList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .bookBlock {
     border: 1px solid #ccc;
     padding: 10px;
-    margin-bottom: 10px;
-    width: 300px;
+    margin-bottom: 20px; 
+    width: 260px;
     background-color: #D1EDE1;
-    /* Swans Down */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    border-radius: 5px;
+    margin-right: 20px; 
 }
 
 .bookBlock:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .bookBlock p {
@@ -58,19 +69,21 @@ button {
 }
 
 .bookBlock button {
-    padding: 8px;
+    padding: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 10px;
     cursor: pointer;
 }
 
 .logEntry {
     border: 1px solid #028C6A;
     background-color: #D1EDE1;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 10px; 
+    margin-bottom: 20px; 
     color: black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

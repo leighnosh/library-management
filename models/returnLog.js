@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../util/database');
 
 const ReturnLog = sequelize.define('ReturnLog', {
@@ -15,7 +15,5 @@ const ReturnLog = sequelize.define('ReturnLog', {
     allowNull: false,
   },
 });
-
-sequelize.sync(); 
 
 module.exports = ReturnLog;
