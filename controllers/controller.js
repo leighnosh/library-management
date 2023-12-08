@@ -1,9 +1,20 @@
 const Book = require('../models/book');
 const ReturnLog = require('../models/returnLog');
 
+const calculateLateFee = (issueTime) => {
+  const currentTime = new Date();
+  const timeDifferenceInHours = (currentTime - new Date(issueTime)) / 36e5;
+  return Math.max(0, Math.floor(timeDifferenceInHours - 1) * 10);
+};
+
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.findAll();
+    let books = await Book.findAll();
+    books = books.map((bookData) => {
+      const book = bookData.get();
+      book.late_fee = calculateLateFee(book.issue_time);
+      return book;
+    });
     res.json(books);
   } catch (error) {
     handleError(res, error);
@@ -17,8 +28,8 @@ exports.issueBook = async (req, res) => {
       title,
       issue_time: new Date(),
     });
-
-    res.json({ book });
+    book.late_fee = 0;
+    res.json(book);
   } catch (error) {
     handleError(res, error);
   }
@@ -34,11 +45,29 @@ exports.returnBook = async (req, res) => {
     }
 
     const returnLog = await processReturn(book);
+    await Book.destroy({ where: { id: book.id } });
 
-    res.json({ fee: returnLog.lateFee, returnLog });
+    res.json({ returnLog });
   } catch (error) {
     handleError(res, error);
   }
+};
+
+const processReturn = async (book) => {
+  const returnTime = new Date();
+  const lateFee = calculateLateFee(book.issue_time);
+
+  return await ReturnLog.create({
+    bookTitle: book.title,
+    lateFee,
+    returnTime,
+  });
+};
+
+const handleError = (res, error) => {
+  res
+    .status(500)
+    .json({ error: 'Internal Server Error', details: error.message });
 };
 
 exports.getAllReturnLogs = async (req, res) => {
@@ -48,35 +77,4 @@ exports.getAllReturnLogs = async (req, res) => {
   } catch (error) {
     handleError(res, error);
   }
-};
-
-const processReturn = async (book) => {
-  const returnTime = new Date();
-  const issueTime = new Date(book.issue_time);
-
-  const timeDifferenceInHours = (returnTime - issueTime) / (60 * 60 * 1000);
-
-  if (!isFinite(timeDifferenceInHours) || timeDifferenceInHours < 0) {
-    throw new Error('Invalid return time');
-  }
-
-  let fee = 0;
-
-  if (timeDifferenceInHours > 1) {
-    fee = Math.floor(timeDifferenceInHours - 1) * 10;
-  }
-
-  await Book.destroy({ where: { id: book.id } });
-
-  return await ReturnLog.create({
-    bookTitle: book.title,
-    lateFee: fee,
-    returnTime: new Date(),
-  });
-};
-
-const handleError = (res, error) => {
-  res
-    .status(500)
-    .json({ error: 'Internal Server Error', details: error.message });
 };
