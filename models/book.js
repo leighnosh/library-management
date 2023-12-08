@@ -10,13 +10,6 @@ const Book = sequelize.define('Book', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
-  return_time: {
-    type: DataTypes.DATE,
-  },
-  late_fee: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
 });
 
 module.exports = Book;
